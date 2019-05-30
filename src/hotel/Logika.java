@@ -2,6 +2,7 @@ package hotel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 
 public class Logika {
 
@@ -53,15 +56,13 @@ public class Logika {
     public ArrayList<Person> getPersonList() {
 
         ArrayList<Person> personList = new ArrayList<Person>();
-        Logika log = new Logika();
-        Connection con = log.getConnection();
-        String qery = "Select * from persons";
-        Statement st;
-        ResultSet rs;
-        try {
 
-            st = con.createStatement();
-            rs = st.executeQuery(qery);
+        String sql = "Select * from persons";
+
+        try {
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
             Person person;
 
             while (rs.next()) {
@@ -75,6 +76,27 @@ public class Logika {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
         return personList;
+    }
+
+    public void DisplayTable(JTable table) {
+        int index = table.getSelectedRow();
+        TableModel model = table.getModel();
+        table.setAutoCreateRowSorter(true);
+
+        String sql = "Select * from rooms";
+        try {
+
+            Connection con = getConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
     }
 
 }

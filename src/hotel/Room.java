@@ -7,9 +7,9 @@ public class Room {
     private String start;
     private String end;
     private int beds;
-    private boolean busy;
+    private String busy;
 
-    public Room(int idRoom, int numberRoom, String start, String end, int beds, boolean busy) {
+    public Room(int idRoom, int numberRoom, String start, String end, int beds, String busy) {
 
         this.idRoom = idRoom;
         this.numberRoom = numberRoom;
@@ -40,7 +40,31 @@ public class Room {
         return beds;
     }
 
-    public boolean getBusy() {
+    public String getBusy() {
         return busy;
+    }
+
+    public void setIdRoom(int idRoom) {
+        this.idRoom = idRoom;
+    }
+
+    public void setNumberRoom(int numberRoom) {
+        this.numberRoom = numberRoom;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public void setSnd(String end) {
+        this.end = end;
+    }
+
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
+
+    public void setBusy(String busy) {
+        this.busy = busy;
     }
 }

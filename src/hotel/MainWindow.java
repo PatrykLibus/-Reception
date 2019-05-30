@@ -343,8 +343,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_JTablePersonMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        String sql = "Select * from persons Where surname=? and name=?";
         try {
-            String sql = "Select * from persons Where surname=? and name=?";
             Connection con = log.getConnection();
             PreparedStatement ps = ps = con.prepareStatement(sql);;
 
@@ -362,10 +363,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        String sql = "INSERT INTO persons(name,surname,number)values( ?,?,? )";
         try {
             Connection con = log.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO persons(name,surname,number)values( ?,?,? )");
+            PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, txtName.getText());
             ps.setString(2, txtSurname.getText());
@@ -385,9 +386,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String sql = "Update persons SET name = ?, surname = ? ,number = ? Where id =?";
         try {
             Connection con = log.getConnection();
-            PreparedStatement ps = con.prepareStatement("Update persons SET name = ?, surname = ? ,number = ? Where id =?");
+            PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, txtName.getText());
             ps.setString(2, txtSurname.getText());
@@ -407,9 +409,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        String sql = "Delete from persons Where id =?";
         try {
             Connection con = log.getConnection();
-            PreparedStatement ps = con.prepareStatement("Delete from persons Where id =?");
+            PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, Integer.parseInt(txtId.getText()));
 
@@ -425,7 +429,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String sql = "Update rooms SET start = ?, end = ?, busy = \"Busy\", idPerson = ?, surname = ? where number = ?; ";
+        String sql = "Update rooms SET start = ?, end = ?, busy = \"Busy\", idPerson = ?, surname = ? where number = ?";
 
         try {
 
@@ -454,7 +458,7 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         log.DisplayTable(JTableRoom);
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -467,7 +471,6 @@ public class MainWindow extends javax.swing.JFrame {
 
             JTableRoom.setModel(DbUtils.resultSetToTableModel(rs));
 
-// TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -490,14 +493,13 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "UPDATE SUCCEDFUL");
             con.close();
 
-// TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void cNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNumberActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cNumberActionPerformed
 
     /**
@@ -505,9 +507,6 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
 
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);

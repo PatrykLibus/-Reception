@@ -1,6 +1,5 @@
 package hotel;
 
-
 public class Person {
 
     private int id;
@@ -15,11 +14,11 @@ public class Person {
         this.id = id;
 
     }
-        public int getId(){
-            
-        return id;    
-        }
 
+    public int getId() {
+
+        return id;
+    }
 
     public String getName() {
 
@@ -35,4 +34,23 @@ public class Person {
         return number;
     }
 
+    public void setId(int id) {
+        this.id = id;
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+
+    }
 }
